@@ -15,6 +15,7 @@ const diaryReducer = (state = initialState, action) => {
         id: id,
         title: action.payload.title,
         acf2: action.payload.acf2,
+        date: action.payload.date,
         text: action.payload.text,
       };
       let newDiaryItems = [item, ...state.diaryItems]

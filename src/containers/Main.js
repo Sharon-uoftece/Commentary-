@@ -15,7 +15,7 @@ export class Main extends Component {
     };
   }
   render() {
-    const { addItem, diaryItems, deleteItem } = this.props;
+    const { addItem, diaryItems, deleteItem } = this.props
     const { show, activeItem } = this.state
     return (
       <div>

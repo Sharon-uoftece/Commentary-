@@ -6,7 +6,7 @@ export default function DiaryItem({ item, showModal, deleteItem }) {
     <div className="diary-row">
       <span onClick={() => showModal(item)}>{item.title}</span>
       <div>
-        <span className="date">{item.acf2}</span>
+        <span className="date">{item.date}</span>
         <TiDeleteOutline 
         onClick={() => deleteItem(item.id)} 
         className="delete" style={{ color: "red" }}/>
