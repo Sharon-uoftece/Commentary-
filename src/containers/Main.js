@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import { connect } from "react-redux";
 import DiaryForm from "../components/DiaryForm";
 import { addItem, deleteItem } from "../redux/actions";
@@ -12,9 +12,30 @@ export class Main extends Component {
     this.state = {
       show: false,
       activeItem: null,
-    };
+    }
   }
+
+  componentDidMount(){
+    let toSend = {
+      name: 'Commentary'
+    }
+
+    fetch('http://localhost:8000/fetch', {
+        method: "POST",
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(toSend)
+      })
+      
+    }
+
+    
+
+
   render() {
+    // const { addItem, deleteItem } = this.props
     const { addItem, diaryItems, deleteItem } = this.props
     const { show, activeItem } = this.state
     return (

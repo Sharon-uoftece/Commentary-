@@ -13,7 +13,7 @@ export default function DiaryForm({ addItem }) {
     const [text, setText] = useState("")
     const [commentDate, setCommentDate] = useState("")
 
-    const onSubmit = (event) => {
+    const onSubmit = async(event) => {
         event.preventDefault()
         let itemObject = {
             title: title,
@@ -21,10 +21,23 @@ export default function DiaryForm({ addItem }) {
             date: formatDate(new Date()),
             text: text
         }
+
         addItem(itemObject)
         setTitle("")
         setText("")
         setAcf2("")
+
+
+        const result = await fetch('http://localhost:8000/addItem',{
+            method: 'POST',
+            mode:'cors',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(itemObject)
+        })
+        .then((response) => console.log("success"))
+        
     }
 
     return (
@@ -35,7 +48,7 @@ export default function DiaryForm({ addItem }) {
                     <input value={acf2} maxLength={4} onChange={(event) => setAcf2(event.target.value)} placeholder="ACF2 id" className="diary-acf2-input"/>
                     {/* <input value={commentDate} onChange={(event) => setCommentDate(event.target.value)} type="date" className="diary-date-input"/> */}
                 </div>
-                <textarea value={text} maxLength={150} onChange={(event) => setText(event.target.value)} placeholder="Enter feedback here" rows="2" className="diary-textarea">
+                <textarea value={text} maxLength={300} onChange={(event) => setText(event.target.value)} placeholder="Enter feedback here" rows="20" className="diary-textarea">
                 </textarea>
                 <button type="submit" className="diary-button">Add Item To Feedback List</button>
             </form>
